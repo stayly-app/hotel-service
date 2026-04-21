@@ -1,4 +1,4 @@
-package com.ciberaccion.stayly.hotel_service;
+package com.ciberaccion.stayly.hotelservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
