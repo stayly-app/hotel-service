@@ -43,6 +43,7 @@ public class Room {
     private BigDecimal pricePerNight;
 
     @Column(columnDefinition = "jsonb")
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     private String amenities;
 
     @Enumerated(EnumType.STRING)
