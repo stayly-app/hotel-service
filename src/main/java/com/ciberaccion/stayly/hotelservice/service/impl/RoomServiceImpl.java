@@ -31,7 +31,8 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> new ResourceNotFoundException("Hotel not found with id: " + hotelId));
 
         if (roomRepository.existsByHotelIdAndRoomNumber(hotelId, request.getRoomNumber())) {
-            throw new IllegalArgumentException("Room number " + request.getRoomNumber() + " already exists in this hotel");
+            throw new IllegalArgumentException(
+                    "Room number " + request.getRoomNumber() + " already exists in this hotel");
         }
 
         Room room = Room.builder()
@@ -44,7 +45,9 @@ public class RoomServiceImpl implements RoomService {
                 .status(request.getStatus())
                 .build();
 
-        return toResponse(roomRepository.save(room));
+        Room saved = roomRepository.save(room);
+        roomRepository.flush();
+        return toResponse(roomRepository.findById(saved.getId()).orElseThrow());
     }
 
     @Override

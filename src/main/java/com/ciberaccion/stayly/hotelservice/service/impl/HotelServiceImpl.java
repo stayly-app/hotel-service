@@ -31,7 +31,9 @@ public class HotelServiceImpl implements HotelService {
                 .stars(request.getStars())
                 .build();
 
-        return toResponse(hotelRepository.save(hotel));
+        Hotel saved = hotelRepository.save(hotel);
+        hotelRepository.flush();
+        return toResponse(hotelRepository.findById(saved.getId()).orElseThrow());
     }
 
     @Override
